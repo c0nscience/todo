@@ -15,18 +15,32 @@ class TodoServiceTest {
 
   @Test
   fun testSaveTodo() {
-    todoService.save(Todo(name = "First"))
+    whenTodoSavedWith("First")
 
     val savedTodos = todoService.findAll()
     assertEquals(1, savedTodos.size)
+
+    assertNameEquals(savedTodos[0], "First")
   }
 
   @Test
   internal fun testSaveTodos() {
-    todoService.save(Todo(name = "First"))
-    todoService.save(Todo(name = "Second"))
+    whenTodoSavedWith("First")
+    whenTodoSavedWith("Second")
 
     val savedTodos = todoService.findAll()
     assertEquals(2, savedTodos.size)
+
+    assertNameEquals(savedTodos[0], "First")
+    assertNameEquals(savedTodos[1], "Second")
+  }
+
+  private fun whenTodoSavedWith(name: String) {
+    todoService.save(Todo(name))
+  }
+
+  private fun assertNameEquals(todo: Todo, expected: String) {
+    val (name) = todo
+    assertEquals(expected, name)
   }
 }
