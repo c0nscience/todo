@@ -1,26 +1,32 @@
 package berlin.herzig.dilabpairingday.todo
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class TodoServiceTest {
 
-  private val todoService: TodoService = TodoService()
+  private var todoService: TodoService = TodoService()
+
+  @BeforeEach
+  internal fun setUp() {
+    todoService = TodoService()
+  }
 
   @Test
   fun testSaveTodo() {
-    val countBeforeSave = todoService.countAll()
-    assertEquals(0, countBeforeSave)
+    todoService.save(Todo(name = "First"))
 
-    val newTodo = Todo(task = "build todo server")
-    val savedTodo = todoService.save(newTodo)
-    assertNotNull(savedTodo)
+    val savedTodos = todoService.findAll()
+    assertEquals(1, savedTodos.size)
+  }
 
-    val countAfterSave = todoService.countAll()
-    assertEquals(1, countAfterSave)
+  @Test
+  internal fun testSaveTodos() {
+    todoService.save(Todo(name = "First"))
+    todoService.save(Todo(name = "Second"))
 
-    val foundTodo = todoService.findById(savedTodo.id!!)
-    assertEquals(newTodo.task, foundTodo.task)
+    val savedTodos = todoService.findAll()
+    assertEquals(2, savedTodos.size)
   }
 }

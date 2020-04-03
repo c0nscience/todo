@@ -1,3 +1,3 @@
 package berlin.herzig.dilabpairingday.todo
 
-data class Todo(val id: Long? = null, val task: String)
+data class Todo(val name: String)
