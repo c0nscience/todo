@@ -1,3 +1,7 @@
 package berlin.herzig.dilabpairingday.todo
 
-data class Todo(val name: String)
+import java.util.*
+
+data class Todo(val id: String = UUID.randomUUID().toString(),
+                val name: String,
+                val star: Boolean = false)

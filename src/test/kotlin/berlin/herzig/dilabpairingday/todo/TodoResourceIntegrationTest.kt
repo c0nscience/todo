@@ -46,8 +46,8 @@ internal class TodoResourceIntegrationTest {
 
   @Test
   internal fun testFindAll() {
-    todoService.save(Todo("pairing day"))
-    todoService.save(Todo("buy toilet paper"))
+    todoService.save(Todo(name = "pairing day"))
+    todoService.save(Todo(name = "buy toilet paper"))
 
     mockMvc.perform(get("/todos"))
       .andExpect(status().isOk)
