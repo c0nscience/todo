@@ -15,4 +15,8 @@ class TodoService {
     return todos
   }
 
+  fun reset() {
+    todos = emptyList()
+  }
+
 }
